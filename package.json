@@ -5,7 +5,7 @@
     "main": "src/main.ts",
     "scripts": {
         "start": "webpack serve --mode development",
-        "build": "webpack --mode production",
+        "build": "webpack --mode production --env publicPath=/sealant-estimator",
         "test": "jest"
     },
     "devDependencies": {

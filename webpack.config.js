@@ -2,14 +2,14 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-module.exports = {
+module.exports = (env) => ({
     entry: './src/main.tsx',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
         library: 'sealant-estimator',
         libraryTarget: 'umd',
-        publicPath: '/'
+        publicPath: env.publicPath || '/',
     },
     module: {
         rules: [
@@ -49,4 +49,4 @@ module.exports = {
         compress: true,
         port: 9000,
     }
-};
+})
