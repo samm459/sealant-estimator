@@ -34,7 +34,7 @@ jobs:
         run: |
           if [ "${{ github.ref }}" == "refs/heads/main" ]; then
             echo "Starting deployment to GitHub Pages..."
-            git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/samm459/${GITHUB_REPOSITORY}.git
+            git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/samm459/sealant-estimator.git
             npx gh-pages -d dist -u "github-actions-bot <support+actions@github.com>"
             echo "Deployment to GitHub Pages completed."
           else
