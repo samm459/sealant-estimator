@@ -11,7 +11,7 @@ on:
 jobs:
   build-test-and-deploy:
     permissions:
-      contents: read
+      contents: write
       pages: write
 
     runs-on: ubuntu-latest
