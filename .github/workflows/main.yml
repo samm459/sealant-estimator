@@ -34,8 +34,8 @@ jobs:
         run: |
           if [ "${{ github.ref }}" == "refs/heads/main" ]; then
             echo "Starting deployment to GitHub Pages..."
-            npm install -g gh-pages
-            gh-pages -d dist
+            git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/samm459/sealant-estimator.git
+            npx gh-pages -d build -u "github-actions-bot <support+actions@github.com>"
             echo "Deployment to GitHub Pages completed."
           else
             echo "Did not deploy. Deploy only runs when branch is main."
