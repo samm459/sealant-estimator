@@ -104,23 +104,30 @@
     --tw-contain-paint:  ;
     --tw-contain-style:  
 }
+.tw-m-auto {
+    margin: auto
+}
+.tw-max-w-\[500px\] {
+    max-width: 500px
+}
 .tw-rounded {
     border-radius: 0.25rem
 }
-.tw-bg-blue-500 {
-    --tw-bg-opacity: 1;
-    background-color: rgb(59 130 246 / var(--tw-bg-opacity))
+.tw-border-solid {
+    border-style: solid
+}
+.tw-border-white {
+    --tw-border-opacity: 1;
+    border-color: rgb(255 255 255 / var(--tw-border-opacity))
 }
 .tw-p-4 {
     padding: 1rem
 }
+.tw-text-\[1\.5rem\] {
+    font-size: 1.5rem
+}
 .tw-text-white {
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity))
-}
-.tw-shadow {
-    --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-    --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
-    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
