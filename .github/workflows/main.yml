@@ -13,6 +13,7 @@ jobs:
     permissions:
       contents: read
       pages: write
+
     runs-on: ubuntu-latest
 
     steps:
