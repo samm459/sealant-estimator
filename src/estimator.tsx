@@ -1,7 +1,7 @@
 export const Estimator = () => {
     return (
-        <div className='tw-text-white tw-bg-blue-500 tw-p-4 tw-shadow tw-rounded'>
-            <h1>Sealant Estimator</h1>
+        <div className='tw-text-white tw-border-solid tw-border-white tw-p-4 tw-rounded tw-max-w-[500px] tw-m-auto'>
+            <h1 className="tw-text-[1.5rem]">Sealant Estimator</h1>
             <p>Estimate the amount of sealant needed for a project</p>
         </div>
     )
