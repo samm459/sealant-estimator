@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client'
+import { Estimator } from './components/estimator'
 import '../styles.css'
-import { Estimator } from './estimator'
 
 (function main() {
     const mountElementId = 'sealant-estimator-root'
