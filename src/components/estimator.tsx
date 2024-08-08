@@ -3,13 +3,13 @@ import { object, number, string } from 'yup'
 import { createEstimate, CreateEstimateOptions } from '../estimate/create'
 import { Estimate } from '../estimate'
 import React from 'react'
-import { getOutputUnitName, outputUnits } from '../estimate/units/output'
+import { getOutputUnitName, OutputUnit, outputUnits } from '../estimate/units/output'
 import { ChevronDown } from '../icons/chevron-down'
 
 export const Estimator = () => {
     const [estimate, setEstimate] = React.useState<Estimate | null>(null)
-
     const [showDropdown, setShowDropdown] = React.useState(false)
+    const [outputUnit, setOutputUnit] = React.useState<OutputUnit>("10oz")
 
     return (
         <div className='tw-text-white tw-border-solid tw-border-white tw-p-[1.5rem] tw-rounded tw-max-w-[500px] tw-m-auto'>
@@ -23,7 +23,7 @@ export const Estimator = () => {
                         depth: 0,
                         widthUnit: 'in',
                         lengthUnit: 'in',
-                        depthUnit: 'in',
+                        depthUnit: 'in'
                     }}
                     validationSchema={object({
                         width: number().required().positive(),
@@ -34,43 +34,55 @@ export const Estimator = () => {
                         depthUnit: string().oneOf(['in', 'ft', 'cm', 'm']).required(),
                     })}
                     onSubmit={(values) => {
-                        setEstimate(createEstimate(values))
+                        setEstimate(createEstimate({ ...values, outputUnit }))
                     }}
                 >
-                    {({ values }) => (
+                    {({ submitForm }) => (
                         <Form>
-                            <div className='tw-mb-4 tw-flex tw-items-center'>
-                                <label className='tw-m-0 tw-p-0 tw-mr-2 tw-min-w-[4rem]' htmlFor="width">Width</label>
-                                <Field name="width" type="number" className='tw-mr-1 tw-p-1 tw-rounded tw-border-solid tw-border tw-border-white tw-bg-transparent tw-text-white tw-shadow-none tw-w-[50px]' />
-                                <ErrorMessage name="width" />
-                                <Field as="select" name="widthUnit" className='tw-ml-1 tw-p-1 tw-rounded tw-border tw-border-solid tw-border-white tw-text-white tw-bg-transparent tw-shadow-none'>
-                                    <option value="in">in</option>
-                                    <option value="ft">ft</option>
-                                    <option value="cm">cm</option>
-                                    <option value="m">m</option>
-                                </Field>
+                            <div className='tw-mb-4'>
+                                <div className='tw-flex tw-items-center'>
+                                    <label className='tw-m-0 tw-p-0 tw-mr-2 tw-min-w-[4rem]' htmlFor="width">Width</label>
+                                    <Field name="width" type="number" className='tw-mr-1 tw-p-1 tw-rounded tw-border-solid tw-border tw-border-white tw-bg-transparent tw-text-white tw-shadow-none tw-w-[50px]' />
+                                    <Field as="select" name="widthUnit" className='tw-ml-1 tw-p-1 tw-rounded tw-border tw-border-solid tw-border-white tw-text-white tw-bg-transparent tw-shadow-none'>
+                                        <option value="in">in</option>
+                                        <option value="ft">ft</option>
+                                        <option value="cm">cm</option>
+                                        <option value="m">m</option>
+                                    </Field>
+                                </div>
+                                <span className='tw-text-red-500'>
+                                    <ErrorMessage name="width" />
+                                </span>
                             </div>
-                            <div className='tw-mb-4 tw-flex tw-items-center'>
-                                <label className='tw-m-0 tw-p-0 tw-mr-2 tw-min-w-[4rem]' htmlFor="depth">Depth</label>
-                                <Field name="depth" type="number" className='tw-mr-1 tw-p-1 tw-rounded tw-border-solid tw-border tw-border-white tw-bg-transparent tw-text-white tw-shadow-none tw-w-[50px]' />
-                                <ErrorMessage name="depth" />
-                                <Field as="select" name="depthUnit" className='tw-ml-1 tw-p-1 tw-rounded tw-border tw-border-solid tw-border-white tw-text-white tw-bg-transparent tw-shadow-none'>
-                                    <option value="in">in</option>
-                                    <option value="ft">ft</option>
-                                    <option value="cm">cm</option>
-                                    <option value="m">m</option>
-                                </Field>
+                            <div className='tw-mb-4'>
+                                <div className='tw-flex tw-items-center'>
+                                    <label className='tw-m-0 tw-p-0 tw-mr-2 tw-min-w-[4rem]' htmlFor="depth">Depth</label>
+                                    <Field name="depth" type="number" className='tw-mr-1 tw-p-1 tw-rounded tw-border-solid tw-border tw-border-white tw-bg-transparent tw-text-white tw-shadow-none tw-w-[50px]' />
+                                    <Field as="select" name="depthUnit" className='tw-ml-1 tw-p-1 tw-rounded tw-border tw-border-solid tw-border-white tw-text-white tw-bg-transparent tw-shadow-none'>
+                                        <option value="in">in</option>
+                                        <option value="ft">ft</option>
+                                        <option value="cm">cm</option>
+                                        <option value="m">m</option>
+                                    </Field>
+                                </div>
+                                <span className='tw-text-red-500'>
+                                    <ErrorMessage name="depth" />
+                                </span>
                             </div>
-                            <div className='tw-flex tw-items-center'>
-                                <label className='tw-m-0 tw-p-0 tw-mr-2 tw-min-w-[4rem]' htmlFor="length">Length</label>
-                                <Field name="length" type="number" className='tw-mr-1 tw-p-1 tw-rounded tw-border-solid tw-border tw-border-white tw-bg-transparent tw-text-white tw-shadow-none tw-w-[50px]' />
-                                <ErrorMessage name="length" />
-                                <Field as="select" name="lengthUnit" className='tw-ml-1 tw-p-1 tw-rounded tw-border tw-border-solid tw-border-white tw-text-white tw-bg-transparent tw-shadow-none'>
-                                    <option value="in">in</option>
-                                    <option value="ft">ft</option>
-                                    <option value="cm">cm</option>
-                                    <option value="m">m</option>
-                                </Field>
+                            <div>
+                                <div className='tw-flex tw-items-center'>
+                                    <label className='tw-m-0 tw-p-0 tw-mr-2 tw-min-w-[4rem]' htmlFor="length">Length</label>
+                                    <Field name="length" type="number" className='tw-mr-1 tw-p-1 tw-rounded tw-border-solid tw-border tw-border-white tw-bg-transparent tw-text-white tw-shadow-none tw-w-[50px]' />
+                                    <Field as="select" name="lengthUnit" className='tw-ml-1 tw-p-1 tw-rounded tw-border tw-border-solid tw-border-white tw-text-white tw-bg-transparent tw-shadow-none'>
+                                        <option value="in">in</option>
+                                        <option value="ft">ft</option>
+                                        <option value="cm">cm</option>
+                                        <option value="m">m</option>
+                                    </Field>
+                                </div>
+                                <span className='tw-text-red-500'>
+                                    <ErrorMessage name="length" />
+                                </span>
                             </div>
                             <button className='tw-shadow tw-mt-4 tw-py-2 tw-px-4 tw-text-lg tw-cursor-pointer tw-border-none tw-rounded tw-bg-orange-700 tw-text-white hover:tw-bg-orange-800 tw-transition-colors' type="submit">Estimate</button>
                             {
@@ -90,7 +102,8 @@ export const Estimator = () => {
                                                                 <div key={unit} className='tw-w-[200px] tw-p-2 tw-cursor-pointer hover:tw-bg-gray-800' onClick={(e) => {
                                                                     e.stopPropagation()
                                                                     setShowDropdown(false)
-                                                                    setEstimate(createEstimate({ ...values, outputUnit: unit }))
+                                                                    setOutputUnit(unit)
+                                                                    submitForm()
                                                                 }}>
                                                                     {getOutputUnitName(unit)}
                                                                 </div>
